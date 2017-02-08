@@ -24,9 +24,9 @@ enum planck_layers {
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
-  NUMBER,
   LOWER,
-  RAISE
+  RAISE,
+  NUMBER
 };
 
 // Fillers to make layering more clear
@@ -65,10 +65,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NUMBER] = {
-  { _______, _______, _______, _______, KC_HOME, KC_UP,   KC_PGUP, ACTION_LAYER_TOGGLE(NUMBER),    KC_KP_7, KC_KP_8,    KC_KP_9,   KC_KP_ASTR},
-  {  KC_TAB, _______, _______, _______, KC_LEFT, _______, KC_RGHT, KC_KP_SLSH, KC_KP_4, KC_KP_5,    KC_KP_6,   KC_KP_PLUS},
-  { _______, _______, _______, _______, KC_END,  KC_DOWN, KC_PGDN, KC_KP_MINS, KC_KP_1, KC_KP_2,    KC_KP_3,   KC_KP_ENT },
-  {KC_LCTRL, _______, KC_LGUI, KC_LALT, _______,   KC_ESC,  KC_SPC,  _______,      KC_KP_0, ACTION_MODS_KEY(KC_KP_0, KC_KP_0),    KC_KP_DOT, KC_KP_ENT}
+  { _______, _______, _______, _______, KC_HOME, 	KC_UP,   KC_PGUP, ACTION_LAYER_TOGGLE(NUMBER),    KC_7, KC_8,    KC_9,   KC_PAST},
+  {  KC_TAB, _______, _______, _______, KC_LEFT, 	_______, KC_RGHT, KC_PSLS, 					KC_4, KC_5,    KC_6,   KC_PLUS},
+  { _______, _______, _______, _______, KC_END,  	KC_DOWN, KC_PGDN, KC_PMNS, 					KC_1, KC_2,    KC_3,   KC_ENT },
+  {KC_LCTRL, _______, KC_LGUI, KC_LALT, _______, 	KC_ESC,  KC_SPC,  _______,      			KC_0, ACTION_MODS_KEY(KC_0, KC_0),    KC_DOT, KC_ENT}
 },
 
 /* Lower
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = {
   {KC_TILD, 	KC_EXLM, 	KC_AT,   	KC_HASH, KC_DLR,  KC_PERC, 	KC_CIRC,	KC_AMPR, 	KC_ASTR, 	KC_LPRN, 	KC_RPRN, 		KC_DEL},
   {KC_TAB,  	KC_F1,   	KC_F2,  	KC_F3,   KC_F4,   KC_F5,   	KC_F6,  	KC_PSCR, 	_______, 	KC_LCBR, 	KC_RCBR, 		KC_PIPE},
-  {_______, 	KC_F7,   	KC_F8,   	KC_F9,   KC_F10,  KC_F11,  	KC_F12,		KC_PAUS,	KC_MSTP,	LSFT(KC_MINS), 	LSHFT(KC_EQL), 	KC_MPLY},
+  {_______, 	KC_F7,   	KC_F8,   	KC_F9,   KC_F10,  KC_F11,  	KC_F12,		KC_PAUS,	KC_MSTP,	LSFT(KC_MINS), 	LSFT(KC_EQL), 	KC_MPLY},
   {KC_LCTRL, 	_______, 	KC_LGUI, 	KC_LALT, _______, KC_ESC, 	KC_SPACE, 	_______, 	KC_MPRV, 	KC_VOLD, 	KC_VOLU, 		KC_MNXT}
 },
 
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TAB,  	_______,   	KC_UP,   	_______,	_______,   	_______,   	_______,   	KC_UP, 		_______,  	KC_LBRC, 	KC_RBRC, 	KC_BSLS},
   {_______, 	KC_LEFT,   	KC_DOWN,   	KC_RIGHT,  	_______,  	_______,  	KC_LEFT,  	KC_DOWN, 	KC_RIGHT, 	KC_MINS, 	KC_EQL, 	KC_ENT},
   {KC_LCTRL, 	_______, 	KC_LGUI, 	KC_LALT,	_______,	KC_ESC, 	KC_SPACE, 	_______, 	KC_HOME, 	KC_PGUP, 	KC_PGDN, 	KC_END}
-}	
+}
 };
 
 #ifdef AUDIO_ENABLE
@@ -141,10 +141,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case NUMBER:
       if (record->event.pressed) {
         layer_on(_NUMBER);
-        update_tri_layer(_LOWER, _RAISE, _NUMBER);
+        //update_tri_layer(_LOWER, _RAISE, _NUMBER);
       } else {
         layer_off(_NUMBER);
-        update_tri_layer(_LOWER, _RAISE, _NUMBER);
+        //update_tri_layer(_LOWER, _RAISE, _NUMBER);
       }
       return false;
       break;
